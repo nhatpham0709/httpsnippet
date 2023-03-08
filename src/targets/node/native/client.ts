@@ -37,7 +37,6 @@ export const native: Client<NodeNativeOptions> = {
       ...(insecureSkipVerify ? { rejectUnauthorized: false } : {}),
     };
 
-    // @ts-expect-error TODO seems like a legit error
     push(`const http = require('${uriObj.protocol.replace(':', '')}');`);
 
     blank();

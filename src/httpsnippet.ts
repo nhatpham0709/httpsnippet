@@ -186,7 +186,6 @@ export class HTTPSnippet {
           // Since the native FormData object is iterable, we easily detect what version of `form-data` we're working with here to allow `multipart/form-data` requests to be compiled under both browser and Node environments.
           //
           // This hack is pretty awful but it's the only way we can use this library in the browser as if we code this against just the native FormData object, we can't polyfill that back into Node because Blob and File objects, which something like `formdata-polyfill` requires, don't exist there.
-          // @ts-expect-error TODO
           const isNativeFormData = typeof form[Symbol.iterator] === 'function';
 
           // TODO: THIS ABSOLUTELY MUST BE REMOVED.
@@ -205,16 +204,13 @@ export class HTTPSnippet {
 
             if (isNativeFormData) {
               if (isBlob(value)) {
-                // @ts-expect-error TODO
                 form.append(name, value, filename);
               } else {
                 form.append(name, value);
               }
             } else {
               form.append(name, value, {
-                // @ts-expect-error TODO
                 filename,
-                // @ts-expect-error TODO
                 contentType: param.contentType || null,
               });
             }
@@ -226,7 +222,6 @@ export class HTTPSnippet {
             }
           } else {
             form.pipe(
-              // @ts-expect-error TODO
               eventStreamMap(data => {
                 request.postData.text += data;
               }),
@@ -247,7 +242,6 @@ export class HTTPSnippet {
         if (!request.postData.params) {
           request.postData.text = '';
         } else {
-          // @ts-expect-error the `har-format` types make this challenging
           request.postData.paramsObj = request.postData.params.reduce(reducer, {});
 
           // always overwrite

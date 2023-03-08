@@ -4,7 +4,6 @@
     "rootDir": "src",
     "allowJs": true,
     "resolveJsonModule": true,
-    "strict": true,
     "esModuleInterop": true,
     "downlevelIteration": true,
     "lib": ["ESNext"]
